@@ -1,36 +1,33 @@
 package com.curso.ecommerce.model;
 
-import java.util.List;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(name = "usuario")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario {
+public class DetalheOrder {
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String username;
-	private String email;
-	private String direccion;
-	private String tipo;
-	private String password;
+	private double quantidade;
+	private double preco;
+	private double total;
 	
-	@OneToMany(mappedBy = "usuario")
-	private List<Produto> produto;
+	@OneToOne
+	private Compra compra;
 	
-	
-	@OneToMany(mappedBy = "usuario")
-	private List<Compra> orders;
+	@ManyToOne
+	private Produto produto;
 }
